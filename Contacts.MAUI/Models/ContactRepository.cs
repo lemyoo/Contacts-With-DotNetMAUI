@@ -44,8 +44,22 @@ namespace Contacts.MAUI.Models
                 contactToUpdate.Email = contact.Email;
                 contactToUpdate.Phone = contact.Phone;
             }
+        }
 
-            
+        public static void AddContact(Contact contact)
+        {
+            var maxId = contacts.Max(x => x.ContactId);
+            contact.ContactId = maxId + 1;
+            contacts.Add(contact);
+        }
+
+        public static void DeletContact(int contactId)
+        {
+            var contact = contacts.FirstOrDefault( x => x.ContactId == contactId);
+            if( contact != null )
+            {
+                contacts.Remove(contact);
+            }
         }
     }
 }
